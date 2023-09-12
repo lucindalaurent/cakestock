@@ -49,8 +49,6 @@ urlpatterns = [
     ...
 ]
 ```
-
-<br>
 - [x] Membuat model pada aplikasi main dengan nama Item dan memiliki atribut wajib sebagai berikut. <br>
 * name sebagai nama item dengan tipe CharField.
 * amount sebagai jumlah item dengan tipe IntegerField.
@@ -58,19 +56,16 @@ urlpatterns = [
 Dilakukan dengan membuka models.py pada direktori aplikasi `main` kemudian mengisi file dengan kode:
 ```bash
 from django.db import models
-
-# Create your models here.
 class Item(models.Model):
     name = models.CharField(max_length=255)
     amount = models.IntegerField()
     description = models.TextField()
     price = models.IntegerField()
 ```
-<br>
 Lalu membuat berkas migrasi berisi perubahan model yang belum diaplikasikan dengan `python manage.py makemigrations`. Terapkan migrasi ke dalam basis data lokal menggunakan `python manage.py migrate`
 
 - [x] Membuat sebuah fungsi pada views.py untuk dikembalikan ke dalam sebuah template HTML yang menampilkan nama aplikasi serta nama dan kelas kamu.
-* Pada berkas `views.py` ditambahkan fungsi render_main untuk me-_render_ tampilan html menggunakan data yang diberikan. <br>
+* Pada berkas `views.py` ditambahkan fungsi render_main untuk me-_render_ tampilan html menggunakan data yang diberikan. 
 ```bash
 from django.shortcuts import render
 def render_main(request):
@@ -82,9 +77,8 @@ def render_main(request):
 
     return render(request, "main.html", context)
 ```
-<br>
-- [x] Membuat sebuah routing pada urls.py aplikasi main untuk memetakan fungsi yang telah dibuat pada `views.py`. <br>
-* Membuat berkas `urls.py`` di dalam direktori `main`.
+- [x] Membuat sebuah routing pada urls.py aplikasi main untuk memetakan fungsi yang telah dibuat pada `views.py`. 
+* Membuat berkas `urls.py` di dalam direktori `main`.
 * Isi file tersebut dengan 
 ```bash
 from django.urls import path
@@ -96,8 +90,7 @@ urlpatterns = [
     path('', render_main, name='render_main'),
 ]
 ```
-<br>
-- [] Melakukan deployment ke Adaptable terhadap aplikasi yang sudah dibuat sehingga nantinya dapat diakses oleh teman-temanmu melalui Internet.
+- [ ] Melakukan deployment ke Adaptable terhadap aplikasi yang sudah dibuat sehingga nantinya dapat diakses oleh teman-temanmu melalui Internet.
 * Karena sudah memiliki akun, saya bisa langsung _sign in_ menggunakan akun github proyek.
 * Setelah _sign in_, tekan tombol `New App`. Pilih `Connect an Existing Repository.`
 * Hubungkan Adaptable.io dengan GitHub dan pilih _All Repositories_ pada proses instalasi.
@@ -109,8 +102,9 @@ urlpatterns = [
 * Masukkan `CakeStock` sebagai nama aplikasi yang juga akan menjadi nama domain situs web aplikasi.
 * Centang bagian `HTTP Listener on PORT` dan klik `Deploy App` untuk memulai proses deployment aplikasi. -> belum berhasil deploy
 
-- [x] Membuat sebuah README.md yang berisi tautan menuju aplikasi Adaptable yang sudah di-deploy, serta jawaban dari beberapa pertanyaan berikut.<br>
+- [x] Membuat sebuah README.md yang berisi tautan menuju aplikasi Adaptable yang sudah di-deploy, serta jawaban dari beberapa pertanyaan berikut.
 Tautan menuju aplikasi Adaptable belum tersedia.
+## Jawaban dari pertanyaan
 * Buatlah bagan yang berisi request client ke web aplikasi berbasis Django beserta responnya dan jelaskan pada bagan tersebut kaitan antara `urls.py`, `views.py`, `models.py`, dan berkas html.
 * Jelaskan mengapa kita menggunakan virtual environment? Apakah kita tetap dapat membuat aplikasi web berbasis Django tanpa menggunakan virtual environment? <br>
 
