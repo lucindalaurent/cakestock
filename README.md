@@ -79,7 +79,7 @@ def render_main(request):
     return render(request, "main.html", context)
 ```
 - [x] Membuat sebuah routing pada urls.py aplikasi main untuk memetakan fungsi yang telah dibuat pada `views.py`. 
-* Membuat berkas `urls.py`` di dalam direktori `main`.
+* Membuat berkas `urls.py` di dalam direktori `main`.
 * Isi file tersebut dengan 
 ```bash
 from django.urls import path
@@ -92,7 +92,7 @@ urlpatterns = [
 ]
 ```
 <br>
-- [] Melakukan deployment ke Adaptable terhadap aplikasi yang sudah dibuat sehingga nantinya dapat diakses oleh teman-temanmu melalui Internet.
+- [ ] Melakukan deployment ke Adaptable terhadap aplikasi yang sudah dibuat sehingga nantinya dapat diakses oleh teman-temanmu melalui Internet.
 * Karena sudah memiliki akun, saya bisa langsung _sign in_ menggunakan akun github proyek.
 * Setelah _sign in_, tekan tombol `New App`. Pilih `Connect an Existing Repository.`
 * Hubungkan Adaptable.io dengan GitHub dan pilih _All Repositories_ pada proses instalasi.
