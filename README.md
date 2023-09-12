@@ -62,7 +62,6 @@ class Item(models.Model):
     description = models.TextField()
     price = models.IntegerField()
 ```
-<br>
 Lalu membuat berkas migrasi berisi perubahan model yang belum diaplikasikan dengan `python manage.py makemigrations`. Terapkan migrasi ke dalam basis data lokal menggunakan `python manage.py migrate`
 
 - [x] Membuat sebuah fungsi pada views.py untuk dikembalikan ke dalam sebuah template HTML yang menampilkan nama aplikasi serta nama dan kelas kamu.
@@ -91,7 +90,6 @@ urlpatterns = [
     path('', render_main, name='render_main'),
 ]
 ```
-<br>
 - [ ] Melakukan deployment ke Adaptable terhadap aplikasi yang sudah dibuat sehingga nantinya dapat diakses oleh teman-temanmu melalui Internet.
 * Karena sudah memiliki akun, saya bisa langsung _sign in_ menggunakan akun github proyek.
 * Setelah _sign in_, tekan tombol `New App`. Pilih `Connect an Existing Repository.`
@@ -104,8 +102,9 @@ urlpatterns = [
 * Masukkan `CakeStock` sebagai nama aplikasi yang juga akan menjadi nama domain situs web aplikasi.
 * Centang bagian `HTTP Listener on PORT` dan klik `Deploy App` untuk memulai proses deployment aplikasi. -> belum berhasil deploy
 
-- [x] Membuat sebuah README.md yang berisi tautan menuju aplikasi Adaptable yang sudah di-deploy, serta jawaban dari beberapa pertanyaan berikut.<br>
+- [x] Membuat sebuah README.md yang berisi tautan menuju aplikasi Adaptable yang sudah di-deploy, serta jawaban dari beberapa pertanyaan berikut.
 Tautan menuju aplikasi Adaptable belum tersedia.
+## Jawaban dari pertanyaan
 * Buatlah bagan yang berisi request client ke web aplikasi berbasis Django beserta responnya dan jelaskan pada bagan tersebut kaitan antara `urls.py`, `views.py`, `models.py`, dan berkas html.
 * Jelaskan mengapa kita menggunakan virtual environment? Apakah kita tetap dapat membuat aplikasi web berbasis Django tanpa menggunakan virtual environment? <br>
 
