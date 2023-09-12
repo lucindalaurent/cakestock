@@ -49,8 +49,6 @@ urlpatterns = [
     ...
 ]
 ```
-
-<br>
 - [x] Membuat model pada aplikasi main dengan nama Item dan memiliki atribut wajib sebagai berikut. <br>
 * name sebagai nama item dengan tipe CharField.
 * amount sebagai jumlah item dengan tipe IntegerField.
@@ -58,8 +56,6 @@ urlpatterns = [
 Dilakukan dengan membuka models.py pada direktori aplikasi `main` kemudian mengisi file dengan kode:
 ```bash
 from django.db import models
-
-# Create your models here.
 class Item(models.Model):
     name = models.CharField(max_length=255)
     amount = models.IntegerField()
@@ -70,7 +66,7 @@ class Item(models.Model):
 Lalu membuat berkas migrasi berisi perubahan model yang belum diaplikasikan dengan `python manage.py makemigrations`. Terapkan migrasi ke dalam basis data lokal menggunakan `python manage.py migrate`
 
 - [x] Membuat sebuah fungsi pada views.py untuk dikembalikan ke dalam sebuah template HTML yang menampilkan nama aplikasi serta nama dan kelas kamu.
-* Pada berkas `views.py` ditambahkan fungsi render_main untuk me-_render_ tampilan html menggunakan data yang diberikan. <br>
+* Pada berkas `views.py` ditambahkan fungsi render_main untuk me-_render_ tampilan html menggunakan data yang diberikan. 
 ```bash
 from django.shortcuts import render
 def render_main(request):
@@ -82,8 +78,7 @@ def render_main(request):
 
     return render(request, "main.html", context)
 ```
-<br>
-- [x] Membuat sebuah routing pada urls.py aplikasi main untuk memetakan fungsi yang telah dibuat pada `views.py`. <br>
+- [x] Membuat sebuah routing pada urls.py aplikasi main untuk memetakan fungsi yang telah dibuat pada `views.py`. 
 * Membuat berkas `urls.py`` di dalam direktori `main`.
 * Isi file tersebut dengan 
 ```bash
