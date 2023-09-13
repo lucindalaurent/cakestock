@@ -7,7 +7,7 @@ class mainTest(TestCase):
         Item.objects.create(name = "eggtart", amount = 10, description = "small circular tarts of flaky pastry, filled with a smooth, lightly sweetened egg custard.", price = 7000)
         Item.objects.create(name = "blackforest", amount = 2, description = "rich chocolate cake layers combined with fresh cherries, cherry liqueur, and a simple whipped cream frosting.", price = 200000)
 
-    #tes apakah benar ada 2 jenis objek yang telah dibuat
+    #tes apakah benar ada 2 buah objek Item yang telah dibuat
     def test_total_object(self):
         hitungjumlah = Item.objects.all().count()
         self.assertEqual(hitungjumlah,2)

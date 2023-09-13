@@ -49,10 +49,11 @@ urlpatterns = [
     ...
 ]
 ```
-- [x] Membuat model pada aplikasi main dengan nama Item dan memiliki atribut wajib sebagai berikut. <br>
+- [x] Membuat model pada aplikasi main dengan nama Item dan memiliki atribut sebagai berikut. <br>
 * _name_ sebagai nama item dengan tipe CharField.
 * _amount_ sebagai jumlah item dengan tipe IntegerField.
 * _description_ sebagai deskripsi item dengan tipe TextField. <br>
+* _price_ sebagai harga item dengan tipe IntegerField (tidak wajib)
 Dilakukan dengan membuka models.py pada direktori aplikasi `main` kemudian mengisi file dengan kode:
 ```bash
 from django.db import models
@@ -65,7 +66,7 @@ class Item(models.Model):
 Lalu membuat berkas migrasi berisi perubahan model yang belum diaplikasikan dengan perintah `python manage.py makemigrations`. Berkas migrasi tersebut diterapkan ke dalam basis data lokal menggunakan `python manage.py migrate`
 
 - [x] Membuat sebuah fungsi pada views.py untuk dikembalikan ke dalam sebuah template HTML yang menampilkan nama aplikasi serta nama dan kelas kamu.
-* Pada berkas `views.py` ditambahkan fungsi render_main untuk me-_render_ tampilan html menggunakan data yang diberikan. 
+* Pada berkas `views.py` ditambahkan fungsi `render_main` untuk me-_render_ tampilan html menggunakan data yang diberikan. 
 ```bash
 from django.shortcuts import render
 def render_main(request):
@@ -111,24 +112,25 @@ Tautan menuju aplikasi Adaptable belum tersedia :(
 Penjelasan:
 1. Saat _user_ melakukan _request_ ke internet, Django akan menerima http _request_
 2. Jika _path_ http _request_ yang diterima ada di dalam `urls.py`,  _request_ akan diteruskan dan memanggil fungsi pada `views.py`.
-3. Secara umum, View(views.py) akan memproses _request_ sesuai dengan fungsi yang telah definisikan dengan mengambil data dari _database_ (models.py) dan menyajikan data tersebut sesuai isi file html di dalam Template(melakukan render template). Selain membaca, View juga bisa menulis atau menambahkan data ke _database_. 
+3. Secara umum, View`(views.py)`akan memproses _request_ sesuai dengan fungsi yang telah definisikan dengan mengambil data dari _database_ `(models.py)` dan menyajikan data tersebut sesuai isi file html di dalam Template(melakukan render template). Selain membaca, View juga bisa menulis atau menambahkan data ke _database_. 
 4. Setelah prosesnya selesai, _request_ dari _user_ akan dikembalikan sebagai _response_ yaitu halaman html yang telah di-_render_.
 
 ## Jelaskan mengapa kita menggunakan virtual environment? Apakah kita tetap dapat membuat aplikasi web berbasis Django tanpa menggunakan virtual environment? <br>
 _Virtual environment_ adalah alat yang membantu memisahkan dependensi yang diperlukan oleh proyek berbeda dengan membuat lingkungan virtual python terisolasi untuk proyek tersebut. Kita menggunakan _virtual environment_ karena penggunaan _virtual environment_ memiliki banyak keunggulan.
-Setiap _virtual environment_ memiliki _package_ tersendiri yang terisolasi dari _global package_ maupun _package_ dari _virtual environment_ lainnya. Ini memungkinkan kita untuk memiliki versi _package_ yang berbeda untuk proyek-proyek yang berbeda tanpa khawatir akan adanya konflik. Selain itu, kita dapat membuat file requirements.txt yang mencantumkan semua _package_ dan versi yang dibutuhkan oleh proyek kita. Jika seseorang ingin menjalankan kode kita di mesin mereka, mereka hanya perlu membuat _virtual environment_ baru dan menginstal semua paket yang tercantum dalam file requirements.txt. Ini memastikan bahwa mereka memiliki semua _dependencies_ yang diperlukan dan dalam versi yang tepat. Oleh karena itu, penggunaan _virtual environment_ sangat membantu dalam kolaborasi dan penyebaran kode. Ya, kita dapat tetap membuat aplikasi web berbasis Django tanpa menggunakan _virtual environment_. Jika proyek aplikasi web kita sederhana dan tidak _package-dependent_, kita tidak memerlukan isolasi untuk versi _package_ yang berbeda. Namun jika proyek kita memerlukan _package_ atau _library_ tambahan, sebaiknya kita memang menggunakan _virtual environment_ untuk mengelola _dependencies_ dan mencegah konflik antarversi _package_ yang berbeda. 
+Setiap _virtual environment_ memiliki _package_ tersendiri yang terisolasi dari _global package_ maupun _package_ dari _virtual environment_ lainnya. Ini memungkinkan kita untuk memiliki versi _package_ yang berbeda untuk proyek-proyek yang berbeda tanpa khawatir akan adanya konflik. Selain itu, kita dapat membuat file `requirements.txt` yang mencantumkan semua _package_ dan versi yang dibutuhkan oleh proyek kita. Jika seseorang ingin menjalankan kode kita di mesin mereka, mereka hanya perlu membuat _virtual environment_ baru dan menginstal semua paket yang tercantum dalam file `requirements.txt`. Ini memastikan bahwa mereka memiliki semua _dependencies_ yang diperlukan dan dalam versi yang tepat. Oleh karena itu, penggunaan _virtual environment_ sangat membantu dalam kolaborasi dan penyebaran kode. <br>
+Ya, kita dapat tetap membuat aplikasi web berbasis Django tanpa menggunakan _virtual environment_. Jika proyek aplikasi web kita sederhana dan tidak bersifat _package-dependent_, kita tidak memerlukan isolasi untuk versi _package_ yang berbeda. Namun jika proyek kita memerlukan _package_ atau _library_ tambahan, sebaiknya kita memang menggunakan _virtual environment_ untuk mengelola _dependencies_ dan mencegah konflik antarversi _package_ yang berbeda. 
 
 ## Jelaskan apakah itu MVC, MVT, MVVM dan perbedaan dari ketiganya. <br>
 MVC, MVT, dan MVVM adalah macam-macam pola desain populer dalam pengembangan perangkat lunak yang digunakan untuk memisahkan logika aplikasi menjadi komponen-komponen yang berbeda.
-1. MVC: Model-View-Controller
-Model: komponen yang berisi tentang logika bisnis dan status data yang ada di dalam aplikasi. Komponen ini bertugas untuk mendapatkan dan memanipulasi data, berkomunikasi dengan Controller, berinteraksi dengan database, terkadang memperbarui tampilan dari aplikasi yang dikembangkan.
-View: komponen yang berhubungan dengan antarmuka pengguna, biasanya terdiri dari HTML/CSS.XML. View berkerja sama dengan Controller untuk menciptakan tampilan dinamis pada aplikasi yang dikembangkan. Selain bertugas untuk menangani antarmuka dan interaksi pengguna, komponen View juga memiliki tugas untuk menyajikan data yang sesuai untuk pengguna.
-Controller: komponen yang berfungsi sebagai komunikator antara View dan model. Komponen ini membutuhkan suatu input pengguna dari layanan View/REST. Lalu Permintaan “Get Data” diproses dari model dan diteruskan ke View untuk ditampilkan ke pengguna.
-2. MVT: Model-View-Template
-MVT adalah variasi dari pola MVC yang digunakan oleh Django. Dalam MVT, “Template” adalah apa yang disebut “View” dalam MVC, dan “View” dalam MVT adalah apa yang disebut “Controller” dalam MVC. Jadi, dalam MVT, View bertanggung jawab untuk menangani permintaan dan logika bisnis, sementara Template bertanggung jawab untuk menampilkan data kepada pengguna.
-3. MVVM: Model-View-ViewModel
-Model: Model yang digunakan untuk MVVM mirip dengan model yang digunakan MVC, dimana model tersebut terdiri dari data dasar yang digunakan untuk menjalankan perangkat lunak.
-View: View digunakan sebagai antarmuka grafis antara pengguna dan pola desain, serta menampilkan output dari data yang telah diproses. View yang digunakan MVVM mirip dengan View yang digunakan dalam MVC. View pada MVVM juga menangani input user. 
+1. MVC: Model-View-Controller <br>
+Model: komponen yang berisi tentang logika bisnis dan status data yang ada di dalam aplikasi. Komponen ini bertugas untuk mendapatkan dan memanipulasi data, berkomunikasi dengan Controller, berinteraksi dengan database, terkadang memperbarui tampilan dari aplikasi yang dikembangkan.<br>
+View: komponen yang berhubungan dengan antarmuka pengguna, biasanya terdiri dari HTML/CSS.XML. View berkerja sama dengan Controller untuk menciptakan tampilan dinamis pada aplikasi yang dikembangkan. Selain bertugas untuk menangani antarmuka dan interaksi pengguna, komponen View juga memiliki tugas untuk menyajikan data yang sesuai untuk pengguna.<br>
+Controller: komponen yang berfungsi sebagai komunikator antara View dan model. Komponen ini membutuhkan suatu input pengguna dari layanan View/REST. Lalu Permintaan “Get Data” diproses dari model dan diteruskan ke View untuk ditampilkan ke pengguna.<br>
+2. MVT: Model-View-Template<br>
+MVT adalah variasi dari pola MVC yang digunakan oleh Django. Dalam MVT, “Template” adalah apa yang disebut “View” dalam MVC, dan “View” dalam MVT adalah apa yang disebut “Controller” dalam MVC. Dalam MVT, View bertanggung jawab untuk menangani permintaan dan logika bisnis, sementara Template bertanggung jawab untuk menampilkan data kepada pengguna. <br>
+3. MVVM: Model-View-ViewModel<br>
+Model: Model yang digunakan untuk MVVM mirip dengan model yang digunakan MVC, dimana model tersebut terdiri dari data dasar yang digunakan untuk menjalankan perangkat lunak.<br>
+View: View digunakan sebagai antarmuka grafis antara pengguna dan pola desain, serta menampilkan output dari data yang telah diproses. View yang digunakan MVVM mirip dengan View yang digunakan dalam MVC. View pada MVVM juga menangani input user. <br>
 ViewModel: ViewModel di satu sisi adalah abstraksi dari View, lalu di sisi yang lain, sebagai penyedia pembungkus data model untuk ditautkan. ViewModel terdiri dari Model yang diubah menjadi View, dan berisi perintah yang dapat digunakan oleh View untuk memengaruhi Model.
 
 
