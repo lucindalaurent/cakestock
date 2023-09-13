@@ -40,7 +40,7 @@ INSTALLED_APPS = [
 ```
 - [x] Melakukan routing pada proyek agar dapat menjalankan aplikasi `main`.<br>
 * Membuka berkas `urls.py` dalam direktori proyek `cakestock`.
-* Impor fungsi `include`, lalu tambahkan rute url untuk mengarahkan ke tampilan `main`  
+* Mengimpor fungsi `include`, lalu tambahkan rute url untuk mengarahkan ke tampilan `main`  
 
 ```bash
 urlpatterns = [
@@ -52,8 +52,8 @@ urlpatterns = [
 - [x] Membuat model pada aplikasi main dengan nama Item dan memiliki atribut sebagai berikut. <br>
 * _name_ sebagai nama item dengan tipe CharField.
 * _amount_ sebagai jumlah item dengan tipe IntegerField.
-* _description_ sebagai deskripsi item dengan tipe TextField. <br>
-* _price_ sebagai harga item dengan tipe IntegerField (tidak wajib)
+* _description_ sebagai deskripsi item dengan tipe TextField. 
+* _price_ sebagai harga item dengan tipe IntegerField (tidak wajib)<br>
 Dilakukan dengan membuka models.py pada direktori aplikasi `main` kemudian mengisi file dengan kode:
 ```bash
 from django.db import models
@@ -80,7 +80,7 @@ def render_main(request):
 ```
 - [x] Membuat sebuah routing pada urls.py aplikasi main untuk memetakan fungsi yang telah dibuat pada `views.py`. 
 * Membuat berkas `urls.py` di dalam direktori `main`.
-* Isi file tersebut dengan 
+* Mengisi file tersebut dengan 
 ```bash
 from django.urls import path
 from main.views import render_main
@@ -123,15 +123,15 @@ Ya, kita dapat tetap membuat aplikasi web berbasis Django tanpa menggunakan _vir
 ## Jelaskan apakah itu MVC, MVT, MVVM dan perbedaan dari ketiganya. <br>
 MVC, MVT, dan MVVM adalah macam-macam pola desain populer dalam pengembangan perangkat lunak yang digunakan untuk memisahkan logika aplikasi menjadi komponen-komponen yang berbeda.
 1. MVC: Model-View-Controller <br>
-Model: komponen yang berisi tentang logika bisnis dan status data yang ada di dalam aplikasi. Komponen ini bertugas untuk mendapatkan dan memanipulasi data, berkomunikasi dengan Controller, berinteraksi dengan database, terkadang memperbarui tampilan dari aplikasi yang dikembangkan.<br>
-View: komponen yang berhubungan dengan antarmuka pengguna, biasanya terdiri dari HTML/CSS.XML. View berkerja sama dengan Controller untuk menciptakan tampilan dinamis pada aplikasi yang dikembangkan. Selain bertugas untuk menangani antarmuka dan interaksi pengguna, komponen View juga memiliki tugas untuk menyajikan data yang sesuai untuk pengguna.<br>
-Controller: komponen yang berfungsi sebagai komunikator antara View dan model. Komponen ini membutuhkan suatu input pengguna dari layanan View/REST. Lalu Permintaan “Get Data” diproses dari model dan diteruskan ke View untuk ditampilkan ke pengguna.<br>
+* Model: komponen yang berisi tentang logika bisnis dan status data yang ada di dalam aplikasi. Komponen ini bertugas untuk mendapatkan dan memanipulasi data, berkomunikasi dengan Controller, berinteraksi dengan database, terkadang memperbarui tampilan dari aplikasi yang dikembangkan.<br>
+* View: komponen yang berhubungan dengan antarmuka pengguna, biasanya terdiri dari HTML/CSS.XML. View berkerja sama dengan Controller untuk menciptakan tampilan dinamis pada aplikasi yang dikembangkan. Selain bertugas untuk menangani antarmuka dan interaksi pengguna, komponen View juga memiliki tugas untuk menyajikan data yang sesuai untuk pengguna.<br>
+* Controller: komponen yang berfungsi sebagai komunikator antara View dan model. Komponen ini membutuhkan suatu input pengguna dari layanan View/REST. Lalu Permintaan “Get Data” diproses dari model dan diteruskan ke View untuk ditampilkan ke pengguna.<br>
 2. MVT: Model-View-Template<br>
 MVT adalah variasi dari pola MVC yang digunakan oleh Django. Dalam MVT, “Template” adalah apa yang disebut “View” dalam MVC, dan “View” dalam MVT adalah apa yang disebut “Controller” dalam MVC. Dalam MVT, View bertanggung jawab untuk menangani permintaan dan logika bisnis, sementara Template bertanggung jawab untuk menampilkan data kepada pengguna. <br>
 3. MVVM: Model-View-ViewModel<br>
-Model: Model yang digunakan untuk MVVM mirip dengan model yang digunakan MVC, dimana model tersebut terdiri dari data dasar yang digunakan untuk menjalankan perangkat lunak.<br>
-View: View digunakan sebagai antarmuka grafis antara pengguna dan pola desain, serta menampilkan output dari data yang telah diproses. View yang digunakan MVVM mirip dengan View yang digunakan dalam MVC. View pada MVVM juga menangani input user. <br>
-ViewModel: ViewModel di satu sisi adalah abstraksi dari View, lalu di sisi yang lain, sebagai penyedia pembungkus data model untuk ditautkan. ViewModel terdiri dari Model yang diubah menjadi View, dan berisi perintah yang dapat digunakan oleh View untuk memengaruhi Model.
+* Model: Model yang digunakan untuk MVVM mirip dengan model yang digunakan MVC, dimana model tersebut terdiri dari data dasar yang digunakan untuk menjalankan perangkat lunak.<br>
+* View: View digunakan sebagai antarmuka grafis antara pengguna dan pola desain, serta menampilkan output dari data yang telah diproses. View yang digunakan MVVM mirip dengan View yang digunakan dalam MVC. View pada MVVM juga menangani input user. <br>
+* ViewModel: ViewModel di satu sisi adalah abstraksi dari View, lalu di sisi yang lain, sebagai penyedia pembungkus data model untuk ditautkan. ViewModel terdiri dari Model yang diubah menjadi View, dan berisi perintah yang dapat digunakan oleh View untuk memengaruhi Model.
 
 
 
