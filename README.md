@@ -149,16 +149,14 @@ JSON dan XML adalah representasi data yang digunakan dalam pertukaran data antar
 * XML adalah bahasa markup yang digunakan untuk membuat dokumen yang dapat dibaca oleh manusia maupun mesin.
 * XML biasanya digunakan untuk mengirim data yang kompleks dan sangat terstruktur seperti dokumen atau laporan keuangan.
 * XML merepresentasikan item data menggunakan tag dan membentuk struktur pohon dengan _namespace_ untuk kategori data yang berbeda.
-* Saat menggunakan XML, kita perlu mengambil dokumen XML, menggunakan DOM XML untuk melakukan loop pada dokumen, dan mengekstrak nilai untuk disimpan dalam variabel.
 * XML tidak mendukung penggunaan _array_
-* Struktur tag XML lebih kompleks untuk ditulis dan dibaca sehingga menghasilkan file yang memakan banyak ruang.
+* Struktur tag XML lebih kompleks untuk ditulis dan dibaca sehingga menghasilkan file yang memerlukan banyak ruang.
 * Struktur XML rentan terhadap modifikasi yang tidak sah dan deklarasi tipe dokumen eksternal (external document type declaration/DTD) yang tidak terstruktur. 
 
 2. JSON (JavaScript Object Notation):
 * JSON adalah format pertukaran data menggunakan teks yang dapat dibaca baik oleh manusia maupun mesin.
 * JSON umumnya merupakan pilihan yang lebih baik untuk API, aplikasi seluler, dan penyimpanan data.
 * JSON merepresentasikan data sebagai objek yang berisi pasangan _attribute-value_
-* Saat menggunakan JSON, kita perlu mengambil string JSON dan menggunakan JSON.parse() untuk mengurai string JSON.
 * JSON mendukung penggunaan _array_
 * JSON memiliki ukuran file yang lebih kecil dan transmisi data yang lebih cepat.
 * Selain terkesan ringan dan mudah digunakan, JSON memiliki keamanan data yang lebih baik dibandingkan XML.
@@ -167,7 +165,8 @@ JSON dan XML adalah representasi data yang digunakan dalam pertukaran data antar
 * HTML adalah bahasa markup standar untuk dokumen yang dirancang untuk ditampilkan di browser web.
 * HTML tidak dirancang untuk menyimpan data. Sebaliknya, HTML digunakan untuk menampilkan data dan fokus pada bagaimana data terlihat dan disajikan.
 * HTML menggunakan tag untuk menentukan bagaimana konten ditampilkan dalam browser web.
-#### Dalam konteks pengiriman data, XML dan JSON digunakan untuk menyimpan dan mengirim data, sementara HTML digunakan untuk menampilkan data. XML dan JSON digunakan saat data perlu dikirim dari server ke klien atau sebaliknya, sementara HTML digunakan untuk menampilkan data tersebut ke pengguna.<br>
+
+#### Dalam konteks pengiriman data, XML dan JSON digunakan untuk menyimpan dan mengirim data, sementara HTML digunakan untuk menampilkan data. XML dan JSON digunakan saat data perlu dikirim dari server ke klien atau sebaliknya, sementara HTML digunakan untuk menampilkan data tersebut ke pengguna. HTML bukanlah suatu bentuk representasi data. Akan tetapi, HTML dapat digunakan untuk mengumpulkan dan mengirim data ke server dengan menggunakan elemen `form`<br>
 
 ## Mengapa JSON sering digunakan dalam pertukaran data antara aplikasi web modern? <br>
 Meningkatnya popularitas JavaScript turut meningkatkan popularitas JSON. Banyak pengembang yang bekerja dengan JavaScript lebih memilih sintaks JSON yang mudah dibaca daripada struktur XML yang kompleks. Selain itu, JSON lebih mudah diurai daripada XML. Kita dapat mengurai file JSON menjadi objek siap pakai yang dapat dibaca oleh manusia dan mesin. Berikut adalah kelebihan JSON yang menjadi alasan JSON sering digunakan:
