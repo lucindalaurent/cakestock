@@ -6,3 +6,4 @@ class Item(models.Model):
     amount = models.IntegerField()
     description = models.TextField()
     price = models.IntegerField()
+    
