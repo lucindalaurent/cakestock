@@ -20,7 +20,7 @@ def render_main(request):
         'name': request.user.username,
         'class': 'local user',
         'items': items,
-        'last_login': request.session['last_login']
+        'last_login': request.COOKIES['last_login']
     }
 
     return render(request, "main.html", context)
