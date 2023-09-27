@@ -1,0 +1,14 @@
+{% extends 'base.html' %} 
+
+{% block content %}
+<h1>Confirmation to Remove</h1>
+<form method="POST">
+    {% csrf_token %}
+    <p style="font-size: large;">Are you sure you want to remove "{{item.name}}" ?</p>
+    <button>
+        <a href="{% url 'main:render_main' %}">Not sure</a>
+    </button>
+    <input type="submit" value="Confirm" />
+</form>
+
+{% endblock %}

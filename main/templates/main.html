@@ -15,6 +15,7 @@
         <th>Amount</th>
         <th>Description</th>
         <th>Price</th>
+        <th>Change</th>
     </tr>
 
     {% comment %} Berikut cara memperlihatkan data produk di bawah baris ini {% endcomment %}
@@ -22,18 +23,45 @@
     {% for item in items %}
     <tr>
         <td>{{item.name}}</td>
-        <td>{{item.amount}}</td>
+        
+        <td style="text-align: center;">
+            <a href="{% url 'main:increase_amount' item.id %}" style="text-decoration: none;" >
+                <button style="background-color: white;">
+                    +
+                </button>
+            </a>
+            {{item.amount}}
+            <a href="{% url 'main:decrease_amount' item.id %}" style="text-decoration: none;">
+                <button style="background-color: white;">
+                    -
+                </button>
+            </a>
+        </td>
         <td>{{item.description}}</td>
         <td>{{item.price}}</td>
+        <td style="text-align: center;">
+            <a href="{% url 'main:remove_item' item.id %}" style="text-decoration: none;">
+                <button style="background-color: red; color:azure">
+                    remove
+                </button>
+            </a>
+        </td>
+        
     </tr>
     {% endfor %}
 </table>
 
 <br />
+<h5>Sesi terakhir login: {{ last_login }}</h5>
 
 <a href="{% url 'main:create_item' %}">
     <button>
         Add New Item
+    </button>
+</a>
+<a href="{% url 'main:logout' %}">
+    <button>
+        Logout
     </button>
 </a>
 {% endblock content %}
