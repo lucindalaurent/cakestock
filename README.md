@@ -384,10 +384,10 @@ from main.views import render_main, create_item, show_xml, show_json, show_xml_b
 
 # Tugas 4
 - [x] Jawaban Pertanyaan <br>
-## Apa itu Django `UserCreationForm`, dan jelaskan apa kelebihan dan kekurangannya?<br>
+## Apa itu Django `UserCreationForm`, dan jelaskan apa kelebihan dan kekurangannya?
 `UserCreationForm` adalah impor form bawaan Django yang memudahkan pembuatan formulir pendaftaran pengguna dalam aplikasi web. Dengan formulir ini, pengguna baru dapat mendaftar dengan mudah di situs web kita tanpa kita harus menulis kode dari awal. Untuk menggunakan `UserCreationForm`, kita perlu mengimpornya dari `django.contrib.auth.forms`. Django `UserCreationForm` hanya memiliki 3 buah _fields_: _username, password1, dan _password2_ (field untuk konfirmasi password). Oleh karena itu, kelebihan `UserCreationForm` adalah mudah digunakan dan terintegrasi dengan sistem autentikasi Django. Sedangkan kelemahannya, `UserCreationForm` memiliki _fields_ yang terbatas. Hal ini dapat merugikan, misalnya kita tidak bisa mengirim email verifikasi kepada _user_ yang baru mendaftar karena tidak terdapat _field_ email. Akibatnya kita perlu usaha ekstra untuk memodifikasi dan menambahkan _field_ email atau membuat form registrasi _user_ dari awal.
 
-##  Apa perbedaan antara autentikasi dan otorisasi dalam konteks Django, dan mengapa keduanya penting?<br>
+##  Apa perbedaan antara autentikasi dan otorisasi dalam konteks Django, dan mengapa keduanya penting?
 Autentikasi adalah proses verifikasi identitas pengguna untuk membuktikan orang yang mengakses aplikasi adalah orang yang benar. Dengan kata lain, sistem memastikan apakah benar pengguna adalah siapa yang mereka klaim. Misalnya saat kita melakukan proses _login_, kita akan diminta mengisi _username_ dan _password_ untuk memastikan kita hanya bisa masuk ke akun masing-masing. Sistem kemudian memeriksa apakah ada pengguna dengan nama pengguna tersebut dan apakah kata sandi yang diberikan cocok dengan apa yang ada di sistem. 
 
 Di sisi lain, otorisasi adalah proses lanjutan dari autentikasi, yaitu memverifikasi apakah pengguna memiliki akses terhadap _resource_ tertentu. Contoh penerapan otorisasi adalah adanya perbedaan hak akses untuk _admin_ dan _user_. _Admin_ dapat mengakses semua halaman atau _resource_ yang ada pada aplikasi, sedangkan _user_ memiliki akses terbatas. Kedua konsep ini penting karena autentikasi dan otorisasi membantu menjaga keamanan aplikasi web kita dengan melindungi data dan fungsi aplikasi kita dari akses yang tidak sah. Autentikasi memastikan bahwa hanya pengguna yang valid yang dapat masuk ke sistem aplikasi kita, sementara otorisasi memastikan bahwa pengguna hanya dapat melakukan tindakan yang sesuai dengan hak dan peran mereka (membatasi apa yang dapat dilakukan). 
@@ -410,7 +410,8 @@ Serangan ini dapat terjadi karena browser akan mengirim _cookie_ sebagai respon 
 Serangan di mana penyerang memasukkan script berbahaya ke dalam situs web. Script berbahaya tersebut kemudian dapat mengakses _cookies_. Jika situs web tidak memiliki prosedur keamanan yang ketat, penyerang dapat mencuri _cookies_, menggunakannya untuk menyamar sebagai pengguna tertentu dan mendapatkan akses ke akun dan informasi pengguna tersebut.
 
 ## Implementasi Checklist
--[x] Mengimplementasikan fungsi registrasi, login, dan logout untuk memungkinkan pengguna untuk mengakses aplikasi sebelumnya dengan lancar. <br>
+
+- [x] Mengimplementasikan fungsi registrasi, login, dan logout untuk memungkinkan pengguna untuk mengakses aplikasi sebelumnya dengan lancar. <br>
 1. Menambahkan fungsi untuk melakukan register, login, dan logout di `views.py`:
 * Mengimpor _module, class_, dan `build-in function` yang diperlukan
 ```
@@ -566,7 +567,8 @@ path('logout/', logout_user, name='logout'),
 Agar kedua pengguna hanya dapat melihat item masing-masing, kita perlu merestriksi akses halaman `main`
 
 * Buka `views.py` yang ada pada subdirektori `main` dan tambahkan import `login_required`
-```from django.contrib.auth.decorators import login_required
+```
+from django.contrib.auth.decorators import login_required
 ```
 * Menambahkan kode `@login_required(login_url='/login')` di atas fungsi `render_main` agar halaman `main` hanya dapat diakses oleh pengguna yang sudah login (terautentikasi).
 ```
