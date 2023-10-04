@@ -382,7 +382,8 @@ from main.views import render_main, create_item, show_xml, show_json, show_xml_b
 
 </details>
 
-# Tugas 4
+<details>
+<summary> Tugas 4 </summary>
 - [x] Jawaban Pertanyaan <br>
 ## Apa itu Django `UserCreationForm`, dan jelaskan apa kelebihan dan kekurangannya?
 `UserCreationForm` adalah impor form bawaan Django yang memudahkan pembuatan formulir pendaftaran pengguna dalam aplikasi web. Dengan formulir ini, pengguna baru dapat mendaftar dengan mudah di situs web kita tanpa kita harus menulis kode dari awal. Untuk menggunakan `UserCreationForm`, kita perlu mengimpornya dari `django.contrib.auth.forms`. Django `UserCreationForm` hanya memiliki 3 buah _fields_: _username, password1, dan _password2_ (field untuk konfirmasi password). Oleh karena itu, kelebihan `UserCreationForm` adalah mudah digunakan dan terintegrasi dengan sistem autentikasi Django. Sedangkan kelemahannya, `UserCreationForm` memiliki _fields_ yang terbatas. Hal ini dapat merugikan, misalnya kita tidak bisa mengirim email verifikasi kepada _user_ yang baru mendaftar karena tidak terdapat _field_ email. Akibatnya kita perlu usaha ekstra untuk memodifikasi dan menambahkan _field_ email atau membuat form registrasi _user_ dari awal.
@@ -670,3 +671,77 @@ def logout_user(request):
 <h5>Sesi terakhir login: {{ last_login }}</h5>
 ...
 ```
+</details>
+
+# Tugas 5
+## Jawaban Pertanyaan 
+### Jelaskan manfaat dari setiap _element selector_ dan kapan waktu yang tepat untuk menggunakannya.
+Pertanyaan ini rancu karena _element selector_ merujuk pada penggunaan nama tag HTML sebagai selektor. Manfaat setiap _element selector_ berarti
+menjelaskan penggunaan selector pada setiap tag HTML(?). Maka diasumsikan maksud pertanyaan ialah _selector_ pada CSS secara umum.
+1. Universal Selector (* {}) <br>
+Universal selector digunakan untuk memberikan style yang sama pada semua elemen. Selector ini cocok digunakan untuk melakukan reset style atau ketika ingin memberikan style umum pada semua elemen di suatu halaman.
+2. ID Selector (#value-id {}) <br>
+ID selector digunakan untuk memilih elemen berdasarkan id yang ditentukan. Atribut id bersifat unik dalam satu halaman web. Oleh karena itu, selector ini cocok digunakan ketika ingin memberikan style spesifik pada suatu elemen.
+3. Class Selector (.class-name {})<br>
+Class selector akan memberikan style ke semua elemen HTML dengan nilai atribut class yang sama. Class selector cocok digunakan ketika kita ingin mengelompokkan beberapa tag agar memiliki style yang sama.
+4. Element Selector (p {}) <br>
+Element selector digunakan untuk memberikan style ke semua elemen yang memiliki tag HTML yang sama. Element selector cocok digunakan ketika kita ingin memberikan suatu style untuk semua elemen dengan tag yang sama.
+
+
+###  Jelaskan HTML5 Tag yang kamu ketahui.
+1. `<p>` untuk membuat paragraf
+2. `<br>` untuk menambahkan baris baru
+3. `<div>` untuk mengelompokkan beberapa elemen yang masih merupakan 1 bagian/section.
+4. `<table>` untuk membuat tabel dan mengatur elemen-elemen dalam tabel. 
+5. `<th>` untuk mendefinisikan table header
+6. `<tr>` untuk mendefinisikan table row(baris)
+6. `<td>` untuk mendefinisikan table data(dapat dipandang sebagai isi kolom).
+7. `<h1> sampai <h6>` untuk membuat header, semakin besar angkanya semakin kecil tulisannya. 
+8. `<button>` untuk menambahkan tombol.
+9. `<title>` untuk memberi judul halaman web yang akan ditampilkan pada tab browser, dsb.
+
+
+### Jelaskan perbedaan antara margin dan padding.
+* Margin adalah ruang di luar batas elemen. 
+Margin dapat dianggap sebagai ruang “eksternal” yang memisahkan suatu elemen dari elemen lain di sekitarnya. Misalnya jika kita memiliki dua kotak yang diletakkan bersebelahan, margin adalah ruang/jarak antara dua kotak tersebut.
+* Padding adalah ruang di dalam batas elemen, antara batas elemen dan kontennya. 
+Padding dapat dianggap sebagai ruang “internal” yang memberi jarak antara konten elemen (seperti teks) dengan batas elemen itu sendiri. Misalnya jika kita memiliki kotak dengan teks di dalamnya, padding adalah ruang/jarak antara teks dan batas kotak(border).
+<br>
+
+### Jelaskan perbedaan antara framework CSS Tailwind dan Bootstrap. Kapan sebaiknya kita menggunakan Bootstrap daripada Tailwind, dan sebaliknya?
+* Tailwind
+1. Tailwind CSS membangun tampilan dengan menggabungkan kelas-kelas utilitas yang telah didefinisikan sebelumnya.
+2. Tailwind CSS memiliki file CSS yang lebih kecil dibandingkan Bootstrap dan hanya akan memuat kelas-kelas utilitas yang ada.
+3. Tailwind CSS memiliki memberikan fleksibilitas dan adaptabilitas tinggi terhadap proyek.
+4. Tailwind CSS kurang _beginner friendly_ karena memerlukan pemahaman terhadap kelas-kelas utilitas yang tersedia dan bagaimana menggabungkannya untuk mencapai tampilan yang diinginkan.
+
+
+* Bootstrap
+1. Bootstrap menggunakan gaya dan komponen yang telah didefinisikan, sehingga tampilannya sudah jadi dan dapat digunakan secara langsung.
+2. Bootstrap memerlukan ukuran file CSS yang lebih besar dibandingkan dengan Tailwind CSS karena banyak komponen yang telah didefinisikan.
+3. Bootstrap sering kali menghasilkan tampilan yang lebih konsisten(serupa) di seluruh proyek karena menggunakan komponen yang telah didefinisikan.
+4. Bootstrap lebih _beginner friendly_ karena pemula dapat mulai belajar menggunakan komponen yang telah didefinisikan.
+
+Berdasarkan penjelasan di atas, Bootstrap cocok digunakan bagi pemula yang belum berpengalaman dalam desain tampilan atau CSS karena banyak komponen yang bisa langsung digunakan. Sedangkan Tailwind cocok digunakan jika ingin membuat desain web yang tidak monoton, memiliki kontrol penuh atas komponen, dan lebih ringan(ukuran file secara umum lebih kecil).  
+
+### Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
+1. Menambahkan Bootstrap dan Javascript di templates/base.html
+```
+<head>
+    {% block meta %}
+        ...
+    {% endblock meta %}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+```
+```
+<head>
+    ...
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha384-KyZXEAg3QhqLMpG8r+J4jsl5c9zdLKaUk5Ae5f5b1bw6AUn5f5v8FZJoMxm6f5cH1" crossorigin="anonymous"></script>
+</head>
+```
+2. Melakukan kustomisasi desain menggunakan inline style dan internal style sheets. 
+
+
+
+
