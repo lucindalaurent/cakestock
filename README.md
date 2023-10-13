@@ -673,7 +673,8 @@ def logout_user(request):
 ```
 </details>
 
-# Tugas 5
+<details>
+<summary>Tugas 5</summary>
 ## Jawaban Pertanyaan 
 ### Jelaskan manfaat dari setiap _element selector_ dan kapan waktu yang tepat untuk menggunakannya.
 Pertanyaan ini rancu karena _element selector_ merujuk pada penggunaan nama tag HTML sebagai selektor. Manfaat setiap _element selector_ berarti
@@ -741,7 +742,53 @@ Berdasarkan penjelasan di atas, Bootstrap cocok digunakan bagi pemula yang belum
 </head>
 ```
 2. Melakukan kustomisasi desain menggunakan inline style dan internal style sheets. 
+</details>
 
+# Tugas 6
+## Jawaban Pertanyaan 
+### Jelaskan perbedaan antara asynchronous programming dengan synchronous programming. <br>
+Pada asynchronous programming, satu tugas tidak harus menunggu tugas lain selesai sebelum bisa mulai dikerjakan. Dengan kata lain, tugas-tugas dapat dieksekusi secara paralel, tidak bergantung pada tugas lain. Dampaknya ketika terdapat suatu operasi yang memerlukan waktu lama, operasi tersebut tidak menghentikan eksekusi program utama sehingga membuat program lebih responsif dan efisien. Asynchronous programming biasanya menggunakan mekanisme seperti _callback function_ dan _promises_ untuk menangani hasil operasi yang perlu waktu lama. 
+Penggunaan asynchronous programming bisa lebih kompleks karena adanya mekanisme tersebut. 
+Sedangkan pada synchronous programming, tugas dieksekusi satu per satu sesuai urutannya. Proses eksekusi jadi terhenti saat menunggu(mengerjakan) operasi I/O. Pengerjaan tugas juga menunggu pengerjaan tugas lain selesai terlebih dahulu sehingga kurang efisien saat terdapat operasi yang memerlukan waktu lama. Meski demikian, kode synchronous programming akan lebih mudah dipahami karena urutan eksekusinya sudah jelas. 
 
+### Dalam penerapan JavaScript dan AJAX, terdapat penerapan paradigma event-driven programming. Jelaskan maksud dari paradigma tersebut dan sebutkan salah satu contoh penerapannya pada tugas ini. <br>
+Event-driven programming adalah suatu paradigma pemrograman di mana alur eksekusi suatu program dipengaruhi(ditentukan) oleh event-event yang muncul. Artinya suatu program akan menunggu event tertentu untuk muncul sebelum melanjutkan eksekusi. Paradigma ini akan menghasilkan program yang lebih responsif karena program akan menunggu "sesuatu" terjadi, kemudian memberi respon terhadap event tersebut. Event yang dimaksud bisa berupa _mouse click_, _keyboard events_, _mouse hover_, _form events_, _network events_, _window events_, dan masih banyak lagi. <br>
+Pada penerapan event-driven programming, kita menentukan kode atau fungsi yang akan dijalankan ketika suatu event terjadi(melakukan event handling). Misalnya kita memiliki tombol di situs web kita yang akan men-trigger AJAX request ketika diklik. Daripada menunggu request tersebut selesai dijalankan, kita bisa membuat suatu event listener yang akan men-trigger `callback function` ketika request tersebut sudah selesai dijalankan. `Callback function` ini yang akan menangani respon dari AJAX request tersebut. Dengan demikian, event-driven programming dapat mendukung eksekusi kode secara asynchronous. <br>
+Salah satu contoh penerapan event-driven programming pada tugas ini:<br>
+`document.getElementById("button_add").onclick = addItem` <br>
+Maksud dari kode tersebut adalah saat element dengan id "button_add" diklik, maka fungsi addItem akan dijalankan.
 
+### Jelaskan penerapan asynchronous programming pada AJAX.
+ AJAX bukanlah merupakan sebuah bahasa pemrograman, melainkan sebuah teknologi yang memadukan peramban web (untuk meminta data dari web server) dengan JavaScript dan HTML DOM (untuk menampilkan data). AJAX memungkinkan pengiriman HTTP Request (GET, POST, dll.) ke server secara asinkronus. Penerapan asynchronous programming pada AJAX memungkinkan komunikasi antara browser dan server tanpa perlu me-refresh seluruh halaman web.  Artinya AJAX memungkinkan aplikasi web untuk berkomunikasi dengan server tanpa harus menunggu respon untuk melanjutkan eksekusi perintah berikutnya. <br>
+ AJAX dapat menggunakan objek seperti XMLHttpRequest, library jQuery, atau fetch API untuk mengirim dan menerima data secara asinkronus dari server, sambil menjalankan bagian kode lainnya. Dengan demikian, pengguna dapat memiliki pengalaman yang lebih mulus saat menggunakan aplikasi web.
 
+### Pada PBP kali ini, penerapan AJAX dilakukan dengan menggunakan Fetch API daripada library jQuery. Bandingkanlah kedua teknologi tersebut dan tuliskan pendapat kamu teknologi manakah yang lebih baik untuk digunakan.
+<br>
+
+1. Fetch API
+* Hanya memerlukan JavaScript standar sehingga lebih ringan
+* Perlu menulis kode tambahan untuk tugas yang kompleks seperti manipulasi DOM atau animasi
+* Menggunakan Promise, lebih modern dan lebih sesuai dengan paradigma asynchronous programming
+* Tidak dapat digunakan pada browser lama
+* Cocok digunakan untuk aplikasi web modern
+2. jQuery
+* Memerlukan library eksternal 
+* Memiliki berbagai fitur yang dapat mempermudah manipulasi DOM, animasi, event handling, dan sebagainya
+* Masih menggunakan `callback pattern`, kurang modern dibandingkan Promise
+* Dapat digunakan untuk browser versi lama karena dirancang untuk mendukung berbagai browser
+* Cocok digunakan apabila ingin membuat aplikasi web yang dapat dijalankan di berbagai browser(memerlukan kompabilitas yang luas).
+<br>
+Pada dasarnya, pemilihan antara Fetch API dan jQuery sangat tergantung pada kebutuhan proyek dan preferensi dari developer aplikasi web itu sendiri. Secara umum, kita bisa mengatakan Fetch API adalah pilihan yang lebih baik. Fetch API cocok digunakan untuk mengembangkan aplikasi web modern yang ringan dan memanfaatkan fitur terbaru JavaScript. Selain itu, Fetch API adalah pilihan yang lebih modern dan sesuai dengan perkembangan teknologi web saat ini. Sedangkan jQuery bisa menjadi pilihan yang lebih baik untuk mengembangkan aplikasi web dengan kompabilitas yang luas.
+
+### Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial)
+1. Membuat fungsi `get_item_json` di file `views.py`.
+2. Menambahkan path url `get_item_json` ke dalam urlpatterns pada urls.py yang ada pada direktori main.
+3. Membuat fungsi `getItems` dan `refreshItems` bagian `<script></script>` pada main.html untuk menampilkan seluruh item secara asinkronus.
+4. Membuat fungsi `add_item_ajax` di file `views.py`.
+5. Menambahkan path url fungsi tersebut sebagai `create-ajax/` ke dalam urlpatterns pada urls.py yang ada pada direktori main.
+6. Menghapus bagian kode tabel yang sudah dibuat sebelumnya, diganti dengan div yang nantinya akan diisi dengan cards saat `refreshItems` dijalankan. 
+7. Menambahkan kode untuk mengimplementasikan modal beserta tombol untuk menampilkan modal.
+8. Menambahkan fungsi `addItem` untuk membuat form data baru dan mengirimnya ke server.
+9. Menambahkan fungsi `onclick` pada button "Add Cake" pada modal sebagai event handler untuk menjalankan fungsi `addItem()` apabila tombol diklik.  
+10. Menjalankan command `python manage.py collectstatic` untuk mengumpulkan semua file static ke satu tempat.
+11. Melakukan deployment ke PaaS PBP Fasilkom UI.
