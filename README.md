@@ -746,12 +746,12 @@ Berdasarkan penjelasan di atas, Bootstrap cocok digunakan bagi pemula yang belum
 
 # Tugas 6
 ## Jawaban Pertanyaan 
-### Jelaskan perbedaan antara asynchronous programming dengan synchronous programming. <br>
+### Jelaskan perbedaan antara asynchronous programming dengan synchronous programming. 
 Pada asynchronous programming, satu tugas tidak harus menunggu tugas lain selesai sebelum bisa mulai dikerjakan. Dengan kata lain, tugas-tugas dapat dieksekusi secara paralel, tidak bergantung pada tugas lain. Dampaknya ketika terdapat suatu operasi yang memerlukan waktu lama, operasi tersebut tidak menghentikan eksekusi program utama sehingga membuat program lebih responsif dan efisien. Asynchronous programming biasanya menggunakan mekanisme seperti _callback function_ dan _promises_ untuk menangani hasil operasi yang perlu waktu lama. 
 Penggunaan asynchronous programming bisa lebih kompleks karena adanya mekanisme tersebut. 
 Sedangkan pada synchronous programming, tugas dieksekusi satu per satu sesuai urutannya. Proses eksekusi jadi terhenti saat menunggu(mengerjakan) operasi I/O. Pengerjaan tugas juga menunggu pengerjaan tugas lain selesai terlebih dahulu sehingga kurang efisien saat terdapat operasi yang memerlukan waktu lama. Meski demikian, kode synchronous programming akan lebih mudah dipahami karena urutan eksekusinya sudah jelas. 
 
-### Dalam penerapan JavaScript dan AJAX, terdapat penerapan paradigma event-driven programming. Jelaskan maksud dari paradigma tersebut dan sebutkan salah satu contoh penerapannya pada tugas ini. <br>
+### Dalam penerapan JavaScript dan AJAX, terdapat penerapan paradigma event-driven programming. Jelaskan maksud dari paradigma tersebut dan sebutkan salah satu contoh penerapannya pada tugas ini. 
 Event-driven programming adalah suatu paradigma pemrograman di mana alur eksekusi suatu program dipengaruhi(ditentukan) oleh event-event yang muncul. Artinya suatu program akan menunggu event tertentu untuk muncul sebelum melanjutkan eksekusi. Paradigma ini akan menghasilkan program yang lebih responsif karena program akan menunggu "sesuatu" terjadi, kemudian memberi respon terhadap event tersebut. Event yang dimaksud bisa berupa _mouse click_, _keyboard events_, _mouse hover_, _form events_, _network events_, _window events_, dan masih banyak lagi. <br>
 Pada penerapan event-driven programming, kita menentukan kode atau fungsi yang akan dijalankan ketika suatu event terjadi(melakukan event handling). Misalnya kita memiliki tombol di situs web kita yang akan men-trigger AJAX request ketika diklik. Daripada menunggu request tersebut selesai dijalankan, kita bisa membuat suatu event listener yang akan men-trigger `callback function` ketika request tersebut sudah selesai dijalankan. `Callback function` ini yang akan menangani respon dari AJAX request tersebut. Dengan demikian, event-driven programming dapat mendukung eksekusi kode secara asynchronous. <br>
 Salah satu contoh penerapan event-driven programming pada tugas ini:<br>
@@ -763,8 +763,6 @@ Maksud dari kode tersebut adalah saat element dengan id "button_add" diklik, mak
  AJAX dapat menggunakan objek seperti XMLHttpRequest, library jQuery, atau fetch API untuk mengirim dan menerima data secara asinkronus dari server, sambil menjalankan bagian kode lainnya. Dengan demikian, pengguna dapat memiliki pengalaman yang lebih mulus saat menggunakan aplikasi web.
 
 ### Pada PBP kali ini, penerapan AJAX dilakukan dengan menggunakan Fetch API daripada library jQuery. Bandingkanlah kedua teknologi tersebut dan tuliskan pendapat kamu teknologi manakah yang lebih baik untuk digunakan.
-<br>
-
 1. Fetch API
 * Hanya memerlukan JavaScript standar sehingga lebih ringan
 * Perlu menulis kode tambahan untuk tugas yang kompleks seperti manipulasi DOM atau animasi
@@ -783,7 +781,43 @@ Pada dasarnya, pemilihan antara Fetch API dan jQuery sangat tergantung pada kebu
 ### Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial)
 1. Membuat fungsi `get_item_json` di file `views.py`.
 2. Menambahkan path url `get_item_json` ke dalam urlpatterns pada urls.py yang ada pada direktori main.
-3. Membuat fungsi `getItems` dan `refreshItems` bagian `<script></script>` pada main.html untuk menampilkan seluruh item secara asinkronus.
+3. Membuat fungsi `getItems` dan `refreshItems` bagian `<script></script>` pada main.html untuk menampilkan seluruh item secara asinkronus. <br>
+Fungsi yang banyak berbeda dari tutorial adalah `refreshItems`, karena menambahkan cards.
+```
+async function refreshItems() {
+        count = 0
+        document.getElementById("total_count").innerHTML = ""
+        document.getElementById("insert").innerHTML=""
+        const card_container = document.getElementById("insert")
+        const items = await getItems()
+        items.forEach((item) => {
+            const card_element = document.createElement('div')
+            card_element.innerHTML = `
+            <div class="card-columns">
+            <div class="card mb-3">
+            <div class="card-body">
+                
+                <div class="d-flex">
+                    <h5 class="card-title" style="margin-right: 15px;">${item.fields.name}</h5>
+                    <button class="btn btn-primary btn-sm mr-3" onclick ="decreaseAmount(${item.pk})"
+                        style="margin-right: 5px;">-</button>
+                    <p class="card-text m-0 ml-2 mr-3">${item.fields.amount}</p>
+                    <button class="btn btn-primary btn-sm ml-3" onclick ="increaseAmount(${item.pk})" style="margin-left: 5px;">+</a>
+                </div>
+
+                <p class="card-text">${item.fields.description}</p>
+                <p class="card-text">${item.fields.price}</p>
+            </div>
+            </div>
+            </div>     
+            `
+            card_container.appendChild(card_element)
+            count += 1
+        })
+        document.getElementById("total_count").innerHTML = "Kamu sudah memasukkan " + count + " jenis kue ke CakeStock"
+
+}
+```
 4. Membuat fungsi `add_item_ajax` di file `views.py`.
 5. Menambahkan path url fungsi tersebut sebagai `create-ajax/` ke dalam urlpatterns pada urls.py yang ada pada direktori main.
 6. Menghapus bagian kode tabel yang sudah dibuat sebelumnya, diganti dengan div yang nantinya akan diisi dengan cards saat `refreshItems` dijalankan. 
