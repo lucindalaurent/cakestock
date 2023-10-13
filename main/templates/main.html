@@ -1,6 +1,158 @@
-<h1>{{appname}}</h1>
+{% extends 'base.html' %}
+{% block content %}
+<style>
+    #amount {
+        white-space: nowrap;
+    }
 
-<h5>Name: </h5>
-<p>{{name}}</p> 
-<h5>Class: </h5>
-<p>{{class}} </p> 
+    body {
+        background-color: #fce2aa
+    }
+
+    #username {
+        font-family: Arial, sans-serif;
+        font-size: 24px;
+        color: black;
+    }
+</style>
+<div style="background-image: url('../static/sprinkle.jpg'); ">
+<div class="m-3"> {% comment %} margin sebesar 1rem (16px) di semua sisi elemen {% endcomment %}
+    <div class="d-flex" style="justify-content: center;">
+        <h1>Your {{appname}}</h1>
+        <a href="{% url 'main:logout' %}">
+            <button class=" btn btn-secondary" style="margin-top:10px; text-align:right; margin-left: 1000px;">
+                Logout
+            </button>
+        </a>
+    </div>
+    
+    <hr>
+    <h5>Name: </h5>
+    <p id="username">{{name}}</p>
+
+    <h5>Class: </h5>
+    <p>{{class}} </p>
+    <hr>
+    <h3 id="total_count">Kamu sudah memasukkan {{items.count}} jenis kue ke CakeStock</h3>
+</div>
+<div class="m-5" id="insert"></div>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Add New Cake</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="form" onsubmit="return false;">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="name" class="col-form-label">Name:</label>
+                        <input type="text" class="form-control" id="name" name="name"></input>
+                    </div>
+                    <div class="mb-3">
+                        <label for="amount" class="col-form-label">Amount:</label>
+                        <input type="number" class="form-control" id="amount" name="amount"></input>
+                    </div>
+                    <div class="mb-3">
+                        <label for="price" class="col-form-label">Price:</label>
+                        <input type="number" class="form-control" id="price" name="price"></input>
+                    </div>
+                    <div class="mb-3">
+                        <label for="description" class="col-form-label">Description:</label>
+                        <textarea class="form-control" id="description" name="description"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="button_add" data-bs-dismiss="modal">Add Cake</button>
+            </div>
+        </div>
+    </div>
+</div>
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" style="margin-left: 50px;">Add Item by AJAX</button>
+<div class="m-3">
+    <h5>Sesi terakhir login: {{ last_login }}</h5>
+
+    <a href="{% url 'main:create_item' %}">
+        <button>
+            Add New Item
+        </button>
+    </a>
+</div>
+</div>
+<script>
+    async function getItems() {
+        return fetch("{% url 'main:get_item_json' %}").then((res) => res.json())
+    }
+
+    
+    async function refreshItems() {
+        count = 0
+        document.getElementById("total_count").innerHTML = ""
+        document.getElementById("insert").innerHTML=""
+        const card_container = document.getElementById("insert")
+        const items = await getItems()
+        items.forEach((item) => {
+            const card_element = document.createElement('div')
+            card_element.innerHTML = `
+            <div class="card-columns">
+            <div class="card mb-3">
+            <div class="card-body">
+                
+                <div class="d-flex">
+                    <h5 class="card-title" style="margin-right: 15px;">${item.fields.name}</h5>
+                    <button class="btn btn-primary btn-sm mr-3" onclick ="decreaseAmount(${item.pk})"
+                        style="margin-right: 5px;">-</button>
+                    <p class="card-text m-0 ml-2 mr-3">${item.fields.amount}</p>
+                    <button class="btn btn-primary btn-sm ml-3" onclick ="increaseAmount(${item.pk})" style="margin-left: 5px;">+</a>
+                </div>
+
+                <p class="card-text">${item.fields.description}</p>
+                <p class="card-text">${item.fields.price}</p>
+            </div>
+            </div>
+            </div>     
+            `
+            card_container.appendChild(card_element)
+            count += 1
+        })
+        document.getElementById("total_count").innerHTML = "Kamu sudah memasukkan " + count + " jenis kue ke CakeStock"
+
+    }
+
+    refreshItems()
+
+//somehow not working
+    function decreaseAmount(id) {
+        fetch("decrease-amount/" + id, {
+            method: "POST",
+        }).then(refreshItems)
+
+        return false
+    }
+
+    function increaseAmount(id) {
+        fetch("increase-amount/"+ id, {
+            method: "POST",
+        }).then(refreshItems)
+
+        return false
+    }
+//
+    function addItem() {
+        fetch("{% url 'main:add_item_ajax' %}", {
+            method: "POST",
+            body: new FormData(document.querySelector('#form'))
+        }).then(refreshItems)
+
+        document.getElementById("form").reset()
+        return false
+    }
+
+    document.getElementById("button_add").onclick = addItem
+</script>
+{% endblock content %}
