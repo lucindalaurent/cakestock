@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponseNotFound
 from main.forms import ItemForm
 from django.urls import reverse
 from main.models import Item
@@ -15,6 +15,8 @@ import datetime
 # Create your views here.
 @login_required(login_url='/login')
 def render_main(request):
+    if 'last_login' not in request.COOKIES.keys():
+        return redirect('main:login')
     items = Item.objects.filter(user=request.user)
     context = {
         'appname': 'CakeStock',
@@ -39,18 +41,32 @@ def create_item(request):
     context = {'form': form}
     return render(request, "create_item.html", context)
 
+@csrf_exempt
 def increase_amount(request, item_id):
-    item = Item.objects.get(id= item_id)
-    item.amount += 1
-    item.save()
-    return HttpResponseRedirect(reverse('main:render_main'))
+    if request.method == 'POST':
+        item = Item.objects.get(id= item_id)
+        item.amount += 1
+        item.save()
+        return HttpResponse(b"OK", status=200)
+    
 
+@csrf_exempt
 def decrease_amount(request, item_id):
-    item = Item.objects.get(id= item_id)
-    if item.amount > 0:
-        item.amount -= 1
-    item.save()
-    return HttpResponseRedirect(reverse('main:render_main'))
+    if request.method == 'POST':
+        item = Item.objects.get(id= item_id)
+        if item.amount > 0:
+            item.amount -= 1
+        item.save()
+        return HttpResponse(b"OK", status=200)
+
+@csrf_exempt
+def remove_item_ajax(request, item_id):
+    item = Item.objects.get(id = item_id)
+
+    if request.method == "DELETE":
+        item.delete()
+        return HttpResponse(b"OK", status=200)
+   
 
 @login_required(login_url='/login')
 def remove_item(request, item_id):
@@ -97,7 +113,7 @@ def add_item_ajax(request):
         new_product.save()
 
         return HttpResponse(b"CREATED", status=201)
-
+    
     return HttpResponseNotFound()
 
 
