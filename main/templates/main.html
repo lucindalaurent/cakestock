@@ -86,6 +86,7 @@
     </div>
 </div>
 <script>
+    
     async function getItems() {
         return fetch("{% url 'main:get_item_json' %}").then((res) => res.json())
     }
