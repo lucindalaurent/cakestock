@@ -21,4 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include("main.urls")),
     #link saat mengakses harus ditambah "/main"
+    path('auth/', include('authentication.urls')),
 ]
